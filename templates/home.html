@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Loan Default Prediction</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f5f7fa;
+}
+
+/* NAVBAR */
+
+.navbar{
+    background:#1e3c72;
+    color:white;
+    padding:15px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.navbar h2{
+    margin:0;
+}
+
+.nav-links a{
+    color:white;
+    text-decoration:none;
+    margin-left:20px;
+    font-weight:bold;
+}
+
+.nav-links a:hover{
+    text-decoration:underline;
+}
+
+
+/* HERO SECTION */
+
+.hero{
+    height:450px;
+    background-image:url("{{ url_for('static', filename='images/loan_bg.jpg') }}");
+    background-size:cover;
+    background-position:center;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    color:white;
+}
+
+.hero-content{
+    background:rgba(0,0,0,0.5);
+    padding:40px;
+    border-radius:10px;
+}
+
+.hero h1{
+    font-size:40px;
+}
+
+.hero p{
+    font-size:18px;
+}
+
+.hero button{
+    margin-top:20px;
+    padding:12px 25px;
+    border:none;
+    background:#ff9800;
+    color:white;
+    font-size:16px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.hero button:hover{
+    background:#e68900;
+}
+
+
+/* FEATURES */
+
+.features{
+    padding:60px 40px;
+    text-align:center;
+}
+
+.features h2{
+    margin-bottom:40px;
+}
+
+.feature-box{
+    display:flex;
+    justify-content:space-around;
+}
+
+.card{
+    background:white;
+    padding:30px;
+    width:250px;
+    border-radius:10px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+.card h3{
+    color:#1e3c72;
+}
+
+
+/* FOOTER */
+
+.footer{
+    background:#1e3c72;
+    color:white;
+    text-align:center;
+    padding:20px;
+    margin-top:40px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+    <h2>Loan Prediction System</h2>
+
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+        <a href="/login">Login</a>
+    </div>
+</div>
+
+
+<!-- HERO SECTION -->
+
+<div class="hero">
+<div class="hero-content">
+
+<h1>Loan Default Prediction System</h1>
+
+<p>Predict loan risk using Machine Learning and help banks make better financial decisions.</p>
+
+<a href="/login">
+<button>Admin Login</button>
+</a>
+
+</div>
+</div>
+
+
+<!-- FEATURES -->
+
+<div class="features">
+
+<h2>System Features</h2>
+
+<div class="feature-box">
+
+<div class="card">
+<h3>Fast Prediction</h3>
+<p>Instant loan default prediction using machine learning models.</p>
+</div>
+
+<div class="card">
+<h3>Accurate ML Model</h3>
+<p>Advanced algorithms like XGBoost ensure high accuracy.</p>
+</div>
+
+<div class="card">
+<h3>Risk Analysis</h3>
+<p>Analyze borrower risk before approving loans.</p>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- FOOTER -->
+
+<div class="footer">
+
+<p>Loan Default Prediction System</p>
+<p>Email: support@loanpredict.com</p>
+<p>© 2026 All Rights Reserved</p>
+
+</div>
+
+</body>
+</html>

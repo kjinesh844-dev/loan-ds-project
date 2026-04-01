@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>User Management</title>
+
+<style>
+
+body{
+font-family: Arial;
+background:#f4f6f9;
+}
+
+.container{
+width:80%;
+margin:auto;
+}
+
+h2{
+text-align:center;
+}
+
+form{
+background:white;
+padding:20px;
+margin-bottom:20px;
+}
+
+input,select{
+padding:8px;
+margin:5px;
+}
+
+button{
+padding:8px 15px;
+cursor:pointer;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+background:white;
+}
+
+th,td{
+padding:10px;
+border:1px solid #ddd;
+text-align:center;
+}
+
+.edit{
+background:#3498db;
+color:white;
+}
+
+.delete{
+background:#e74c3c;
+color:white;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>User Management</h2>
+
+<!-- Add User Form -->
+
+<form action="/add_user" method="POST">
+
+<input type="text" name="name" placeholder="Name" required>
+
+<input type="email" name="email" placeholder="Email" required>
+
+<select name="role">
+<option>Admin</option>
+<option>Manager</option>
+<option>User</option>
+</select>
+
+<input type="password" name="password" placeholder="Password" required>
+
+<button type="submit">Add User</button>
+
+</form>
+
+
+<!-- Users Table -->
+
+<table>
+
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Email</th>
+<th>Role</th>
+<th>Password</th>
+<th>Actions</th>
+</tr>
+
+{% for user in users %}
+
+<tr>
+
+<td>{{user.id}}</td>
+<td>{{user.name}}</td>
+<td>{{user.email}}</td>
+<td>{{user.role}}</td>
+<td>{{user.password}}</td>
+
+<td>
+
+<a href="/edit_user/{{user.id}}">
+<button class="edit">Edit</button>
+</a>
+
+<a href="/delete_user/{{user.id}}">
+<button class="delete">Delete</button>
+</a>
+
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+</body>
+</html>

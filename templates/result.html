@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<title>Loan Prediction Result</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+body{
+    font-family:Arial;
+    background:#f4f6f9;
+}
+
+.result-card{
+    background:white;
+    padding:40px;
+    border-radius:10px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    text-align:center;
+}
+
+.progress-circle{
+
+    width:200px;
+    height:200px;
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:30px;
+    font-weight:bold;
+    color:white;
+
+    margin:auto;
+
+}
+
+.low{ background:#28a745; }
+.medium{ background:#ffc107; color:black; }
+.high{ background:#dc3545; }
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container mt-5">
+
+<div class="row justify-content-center">
+
+<div class="col-md-6">
+
+<div class="result-card">
+
+<h2 class="mb-4">Loan Prediction Result</h2>
+
+<h5>Customer Name: {{ name }}</h5>
+<h5>Loan Amount: ₹ {{ loan_amount }}</h5>
+<h5>Income: ₹ {{ income }}</h5>
+<h5>Credit Score: {{ credit_score }}</h5>
+
+<br>
+
+<!-- Risk Circle -->
+
+<div class="progress-circle 
+{% if probability < 40 %}
+low
+{% elif probability < 70 %}
+medium
+{% else %}
+high
+{% endif %}
+">
+
+{{ probability }}%
+
+</div>
+
+<br>
+
+<h4>
+
+{% if probability < 40 %}
+🟢 Low Risk
+<p>Loan Approved - Applicant has good credit history.</p>
+
+{% elif probability < 70 %}
+🟡 Medium Risk
+<p>Loan Under Review - Additional verification required.</p>
+
+{% else %}
+🔴 High Risk
+<p>Loan Rejected - Low credit score or insufficient income.</p>
+
+{% endif %}
+
+</h4>
+
+<br>
+
+<!-- SAVE RESULT -->
+
+<form action="/save_result" method="POST">
+
+<input type="hidden" name="name" value="{{ name }}">
+<input type="hidden" name="loan_amount" value="{{ loan_amount }}">
+<input type="hidden" name="probability" value="{{ probability }}">
+
+{% if probability < 40 %}
+<input type="hidden" name="prediction" value="Low Risk">
+{% elif probability < 70 %}
+<input type="hidden" name="prediction" value="Medium Risk">
+{% else %}
+<input type="hidden" name="prediction" value="High Risk">
+{% endif %}
+
+<button type="submit" class="btn btn-success">Save Result</button>
+
+</form>
+
+<br>
+
+<!-- EXPORT PDF FOR THIS USER ONLY -->
+
+<form action="/export_pdf" method="POST">
+
+<input type="hidden" name="name" value="{{ name }}">
+<input type="hidden" name="loan_amount" value="{{ loan_amount }}">
+<input type="hidden" name="income" value="{{ income }}">
+<input type="hidden" name="credit_score" value="{{ credit_score }}">
+<input type="hidden" name="probability" value="{{ probability }}">
+
+{% if probability < 40 %}
+<input type="hidden" name="prediction" value="Low Risk">
+<input type="hidden" name="message" value="Loan Approved due to good credit score">
+
+{% elif probability < 70 %}
+<input type="hidden" name="prediction" value="Medium Risk">
+<input type="hidden" name="message" value="Loan requires further verification">
+
+{% else %}
+<input type="hidden" name="prediction" value="High Risk">
+<input type="hidden" name="message" value="Loan Rejected due to low credit score or income">
+
+{% endif %}
+
+<button type="submit" class="btn btn-primary">Download PDF Report</button>
+
+</form>
+
+<br>
+
+<a href="/dashboard" class="btn btn-secondary">Back to Dashboard</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>
